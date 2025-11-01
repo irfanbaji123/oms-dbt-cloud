@@ -9,6 +9,6 @@ SELECT
     State,
     ZipCode,
     Updated_at,
-    CONCAT(FirstName, '-', LastName) AS CustomerName
+    CONCAT(FirstName, '_', LastName) AS CustomerName
 FROM
     {{ source('landing', 'customers') }}
