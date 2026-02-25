@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Create Ticket</h3>
+<form method="POST">
+<select name="issue_type" class="form-control mb-3">
+<option>Hardware</option>
+<option>Software</option>
+<option>Network</option>
+<option>Access</option>
+<option>Other</option>
+</select>
+
+<select name="priority" class="form-control mb-3">
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+
+<textarea name="description" class="form-control mb-3" placeholder="Describe issue"></textarea>
+
+<button class="btn btn-success">Submit</button>
+</form>
+{% endblock %}

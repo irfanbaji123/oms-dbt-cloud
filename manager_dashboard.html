@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Manager Approval Panel</h3>
+<table class="table table-bordered">
+<tr><th>ID</th><th>Employee</th><th>Issue</th><th>Priority</th><th>Action</th></tr>
+{% for t in tickets %}
+<tr>
+<td>{{t[0]}}</td>
+<td>{{t[1]}}</td>
+<td>{{t[2]}}</td>
+<td>{{t[3]}}</td>
+<td>
+<a href="/approve/{{t[0]}}" class="btn btn-primary btn-sm">Approve</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

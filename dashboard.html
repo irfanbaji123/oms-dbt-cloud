@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Your Tickets</h3>
+<a href="/create_ticket" class="btn btn-success mb-3">Create Ticket</a>
+<table class="table table-bordered">
+<tr><th>ID</th><th>Issue</th><th>Status</th><th>Priority</th></tr>
+{% for t in tickets %}
+<tr>
+<td>{{t[0]}}</td>
+<td>{{t[1]}}</td>
+<td>{{t[2]}}</td>
+<td>{{t[3]}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
