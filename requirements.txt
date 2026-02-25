@@ -1,0 +1,5 @@
+Flask
+snowflake-connector-python
+bcrypt
+openai
+python-dotenv
