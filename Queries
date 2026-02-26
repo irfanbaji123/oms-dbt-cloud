@@ -1,0 +1,137 @@
+CREATE OR REPLACE DATABASE MY_EMPLOYEE;
+CREATE OR REPLACE SCHEMA EMPLOYEE_TICKET;
+CREATE OR REPLACE TABLE employees (
+    employee_id STRING,
+    name STRING,
+    email STRING,
+    password_hash STRING,
+    role STRING
+);
+
+CREATE OR REPLACE TABLE tickets (
+    ticket_id STRING,
+    employee_id STRING,
+    issue_type STRING,
+    description STRING,
+    priority STRING,
+    status STRING,
+    ai_suggestion STRING,
+    resolution STRING
+);
+
+SELECT * FROM employees;
+select * from tickets;
+
+
+DELETE FROM employees;
+
+INSERT INTO employees (employee_id, name, email, password_hash, role) VALUES
+('EMP001', 'John Smith', 'john.smith@company.com',
+'$2b$12$CwTycUXWue0Thq9StjUM0uJ8yJ3yWcIh0b07XHtcwPa5JNPLXrF8W', 'employee'),
+
+('EMP002', 'Priya Kumar', 'priya.kumar@company.com',
+'$2b$12$CwTycUXWue0Thq9StjUM0uJ8yJ3yWcIh0b07XHtcwPa5JNPLXrF8W', 'employee'),
+
+('EMP003', 'David Lee', 'david.lee@company.com',
+'$2b$12$CwTycUXWue0Thq9StjUM0uJ8yJ3yWcIh0b07XHtcwPa5JNPLXrF8W', 'employee'),
+
+('MGR001', 'Sarah Johnson', 'sarah.johnson@company.com',
+'$2b$12$CwTycUXWue0Thq9StjUM0uJ8yJ3yWcIh0b07XHtcwPa5JNPLXrF8W', 'manager');
+
+
+CREATE OR REPLACE TABLE teams (
+    team_id STRING,
+    team_name STRING,
+    team_email STRING
+);
+
+CREATE OR REPLACE TABLE team_members (
+    member_id STRING,
+    member_name STRING,
+    team_id STRING,
+    email STRING
+);
+
+SELECT * FROM team_members;
+
+SELECT * FROM ticket_assignments;
+
+CREATE OR REPLACE TABLE ticket_assignments (
+    assignment_id STRING,
+    ticket_id STRING,
+    team_id STRING,
+    assigned_to STRING,
+    assigned_at TIMESTAMP,
+    sla_deadline TIMESTAMP,
+    resolved_at TIMESTAMP,
+    resolved_by STRING,
+    resolution_notes STRING
+);
+
+INSERT INTO teams VALUES
+('IT_HW','Hardware Support','hardware@company.com'),
+('IT_NET','Network Support','network@company.com'),
+('IT_SW','Software Support','software@company.com');
+
+INSERT INTO team_members (member_id, member_name, team_id, email) VALUES
+-- Hardware Team
+('HW001', 'Rajesh Kumar', 'IT_HW', 'rajesh.kumar@company.com'),
+('HW002', 'Anita Sharma', 'IT_HW', 'anita.sharma@company.com'),
+('HW003', 'Vikram Singh', 'IT_HW', 'vikram.singh@company.com'),
+
+-- Network Team
+('NET001', 'Suresh Patel', 'IT_NET', 'suresh.patel@company.com'),
+('NET002', 'Neha Verma', 'IT_NET', 'neha.verma@company.com'),
+('NET003', 'Arjun Reddy', 'IT_NET', 'arjun.reddy@company.com'),
+
+-- Software Team
+('SW001', 'Priya Nair', 'IT_SW', 'priya.nair@company.com'),
+('SW002', 'Karan Mehta', 'IT_SW', 'karan.mehta@company.com'),
+('SW003', 'Sneha Iyer', 'IT_SW', 'sneha.iyer@company.com');
+
+
+CREATE OR REPLACE TABLE ticket_assignments (
+    assignment_id STRING,
+    ticket_id STRING,
+    team_id STRING,
+    assigned_to STRING,
+    assigned_at TIMESTAMP,
+    sla_deadline TIMESTAMP,
+    resolved_at TIMESTAMP,
+    resolution_notes STRING
+);
+
+SELECT * FROM ticket_assignments;
+
+UPDATE ticket_assignments
+SET resolved_at = CURRENT_TIMESTAMP(),
+    resolution_notes = 'Outlook has now been reinstalled on your system. Please check.'
+WHERE assignment_id = '6434c20d';
+
+
+ALTER TABLE ticket_assignments
+ADD COLUMN resolved_by STRING;
+
+
+
+
+INSERT INTO employees (employee_id, password_hash, role)
+VALUES 
+('it_hw_01', '$2b$12$xxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'team'),  -- Hardware team
+('it_net_01', '$2b$12$yyyyyyyyyyyyyyyyyyyyyyyyyyyy', 'team'), -- Network team
+('it_sw_01', '$2b$12$zzzzzzzzzzzzzzzzzzzzzzzzzz', 'team');   -- Software team
+
+
+
+
+| Employee ID | Password    | Role |
+| ----------- | ----------- | ---- |
+| it_hw_01    | Password123 | team |
+| it_net_01   | Password123 | team |
+| it_sw_01    | Password123 | team |
+
+
+INSERT INTO employees (employee_id, password_hash, role) VALUES ('it_hw_01', '$2b$12$WLNCXc7JSEgIlmtlusORdedgxh8zHTGEIbwvaEYxt0dPorWR9/JYC', 'team');
+INSERT INTO employees (employee_id, password_hash, role) VALUES ('it_net_01', '$2b$12$27A1//B.9Q0tt.SLx9CSAuss381pwEXCq8nj7YGS9c6.iq6qr5Kqa', 'team');
+INSERT INTO employees (employee_id, password_hash, role) VALUES ('it_sw_01', '$2b$12$02/6JiW6i3JHO.xxpV3t0uQSFXrm.dlDWM2z3xqIZenhR/4sqjQj.', 'team');
+
